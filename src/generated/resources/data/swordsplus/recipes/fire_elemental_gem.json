@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:lava_bucket"
+    },
+    "b": {
+      "item": "swordsplus:goddess_gem"
+    }
+  },
+  "result": {
+    "item": "swordsplus:fire_elemental_gem"
+  }
+}

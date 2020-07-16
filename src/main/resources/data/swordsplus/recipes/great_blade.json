@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a b",
+    " c ",
+    "d a"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:storage_blocks/iron"
+    },
+    "b": {
+      "item": "swordsplus:tempered_edge"
+    },
+    "c": {
+      "item": "minecraft:diamond"
+    },
+    "d": {
+      "item": "swordsplus:sword_hilt"
+    }
+  },
+  "result": {
+    "item": "swordsplus:great_blade"
+  }
+}

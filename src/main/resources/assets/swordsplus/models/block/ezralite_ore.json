@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "swordsplus:block/ezralite_ore"
+  }
+}

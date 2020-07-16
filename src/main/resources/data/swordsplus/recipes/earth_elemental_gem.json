@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "tag": "minecraft:saplings"
+    },
+    "b": {
+      "item": "swordsplus:goddess_gem"
+    }
+  },
+  "result": {
+    "item": "swordsplus:earth_elemental_gem"
+  }
+}

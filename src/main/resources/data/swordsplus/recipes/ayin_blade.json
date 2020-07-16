@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a b",
+    " c ",
+    "d a"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "b": {
+      "item": "swordsplus:tempered_edge"
+    },
+    "c": {
+      "item": "minecraft:ender_eye"
+    },
+    "d": {
+      "item": "swordsplus:sword_hilt"
+    }
+  },
+  "result": {
+    "item": "swordsplus:ayin_blade"
+  }
+}

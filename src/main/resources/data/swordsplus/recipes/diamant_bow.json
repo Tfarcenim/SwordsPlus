@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ac",
+    "b c",
+    " ac"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:ingots/iron"
+    },
+    "b": {
+      "item": "minecraft:diamond"
+    },
+    "c": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "swordsplus:diamant_bow"
+  }
+}

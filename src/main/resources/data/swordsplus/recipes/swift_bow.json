@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "abc",
+    "bac",
+    "abc"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:feathers"
+    },
+    "b": {
+      "item": "minecraft:stick"
+    },
+    "c": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "swordsplus:swift_bow"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a b",
+    " c ",
+    "d a"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:dyes/cyan"
+    },
+    "b": {
+      "item": "swordsplus:tempered_edge"
+    },
+    "c": {
+      "item": "minecraft:glowstone"
+    },
+    "d": {
+      "item": "swordsplus:sword_hilt"
+    }
+  },
+  "result": {
+    "item": "swordsplus:goddess_blade"
+  }
+}

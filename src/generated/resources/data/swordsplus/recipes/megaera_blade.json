@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordsplus:blazing_blade"
+    },
+    {
+      "item": "swordsplus:fire_elemental_gem"
+    }
+  ],
+  "result": {
+    "item": "swordsplus:megaera_blade"
+  }
+}

@@ -1,0 +1,378 @@
+Modname: Swords+ Updated
+Version 1.15.2
+
+
+Ores:
+
+Ezralite Ore
+ - Hardness: 3
+ - Blast Resistance: 3
+ - Requires diamond pickaxe to mine.
+ - On break drops 1-3 Ezralite Dust
+ - Can be smelted to give 1 Ezralite Dust
+ - Found from y=1 to y=16
+ - Vein Size: 1-2
+ - Works with fortune
+ 
+ 
+Tauvelite Ore
+ - Hardness: 3
+ - Blast Resistance: 3
+ - Requires iron pickaxe to mine.
+ - On break drops 1-2 Tauvelite Dust
+ - Found from y=10 to y=30
+ - Vein Size: 1-4
+ - Works with fortune
+ 
+Crafting Items:
+
+Ezralite Dust
+ - Drops from Ezralite Ore
+
+Tauvelite Dust:
+ - Drops from Tauvelite Ore
+ - Can be used in an anvil to replace any vanilla item or item from this mod's repair item.
+ 
+Sword Hilt
+ Recipe:
+ air + air + air
+ iron ingot + iron ingot + air
+ leather + iron ingot + air
+
+Tempered Edge
+ Recipe:
+ air + air + iron ingot
+ air + iron ingot + air
+ iron ingot + air + air 
+
+Goddess Gem
+ Yellow Name
+ Recipe:
+ Ezralite Dust + Ezralite Dust + Ezralite Dust
+ Ezralite Dust + Diamond Block + Ezralite Dust
+ Ezralite Dust + Ezralite Dust + Ezralite Dust
+
+Earth Elemental Gem
+ Yellow Name
+ Recipe:
+ Any Sapling + Any Sapling + Any Sapling
+ Any Sapling + Goddess Gem + Any Sapling
+ Any Sapling + Any Sapling + Any Sapling
+ 
+Fire Elemental Gem
+ Yellow Name
+ Recipe:
+ Lava Bucket + Lava Bucket + Lava Bucket
+ Lava Bucket + Goddess Gem + Lava Bucket
+ Lava Bucket + Lava Bucket + Lava Bucket
+
+Water Elemental Gem
+ Yellow Name
+ Recipe:
+ Water Bucket + Water Bucket + Water Bucket
+ Water Bucket + Goddess Gem + Water Bucket
+ Water Bucket + Water Bucket + Water Bucket
+
+Holy Elemental Gem
+ Yellow Name
+ Recipe:
+ Glowstone + Glowstone + Glowstone
+ Glowstone + Goddess Gem + Glowstone
+ Glowstone + Glowstone + Glowstone
+ 
+Shadow Elemental Gem
+ Yellow Name
+ Recipe:
+ Ender Pearl + Soul Sand + Ender Pearl
+ Soul Sand + Goddess Gem + Soul Sand
+ Ender Pearl + Soul Sand + Ender Pearl
+ 
+Swords:
+ALL SWORDS HAVE 10 ENCHANTABILITY
+
+Venol Rapier:
+ - 5 attack damage
+ - 1.6 attack speed
+ - 130 Durability
+ - Repairable with Tauvelite Dust
+ - Has a 25% chance to inflict poison when attacking.
+ 
+ Recipe: 
+ iron_ingot + air + tempered edge
+ air + fermented spider eye + air
+ sword hilt + air + iron ingot
+ 
+Dianus Blade:
+ - 6 attack damage
+ - 1.6 attack speed
+ - 145 durability
+ - Repairable with Tauvelite Dust
+ - Deals 12 attack damage when critically hitting.
+ Recipe:
+ gold block + air + tempered edge
+ air + obsidian + air
+ hilt + air + gold block
+ 
+Inoue:
+ - Yellow Name
+ - 9 attack damage
+ - 1.9 attack speed
+ - 600 durability
+ - Repairable with Tauvelite Dust
+ - Has an enchantment glint if a hostile mob is within 9 blocks of the player.
+ - All potion effects are removed while the blade is in the player's hand.
+ 
+ Recipe:
+ ghast tear + air + tempered edge
+ air + diamond + air
+ hilt + air + ghast tear
+ 
+Umbra Blade:
+ - 6 Attack Damage
+ - 1.6 attack speed
+ - 300 durability
+ - Repairable with Tauvelite Dust
+ - 10% chance to heal two hearts when attacking with this sword, but lose 4 extra durability.
+ - Chance to lifesteal is increased to 20% at night.
+ 
+ Recipe:
+ Lapis Lazuli Block + air + Tempered Edge
+ Air + soul_sand + air 
+ hilt + air + lapis_block
+ 
+Duff Cake Sword:
+ - 2 Attack Damage
+ - 4 attack speed
+ - 20 durability
+ - Unrepairable.
+ - Right click the sword to eat it, healing 1 heart, 4 hunger points and 6 saturation points.
+ 
+ Recipe:
+ cake + air + tempered edge
+ air + cake + air 
+ hilt + air + cake
+ 
+Great Blade:
+ Yellow Name
+ Lore: Ferrous Series
+ - 10 attack damage
+ - 1.6 Attack Speed
+ - 700 durability
+ - Repairable with Tauvelite Dust
+ - Doesnt lose durability when breaking blocks
+ 
+ Recipe:
+ iron block + air + tempered edge
+ air + diamond + air
+ hilt + air + iron block
+ 
+Titania Blade:
+ Yellow Name
+ Lore: Ferrous Series (Light Grey Text)
+ - 12 attack damage
+ - 1.6 attack speed
+ - 700 durability
+ - Repairable with Tauvelite Dust
+ - Knock backs enemies 5 blocks (Stacks with knockback)
+ - 40% chance to give enemies slowness II for 10 seconds.
+ 
+ Recipe:
+ Earth Gem + Great Blade (Shapeless)
+ 
+Calibur Blade:
+ Yellow Name
+ Lore: Aurum Series (Light Grey Text)
+ - 14 Attack Damage
+ - 1.6 Attack Speed
+ - 16 durability
+ - Unrepairable
+ - Restores 1 durability every 15 seconds when held. 
+ 
+ Recipe:
+ gold block + air + tempered edge
+ air + diamond + gold block
+ hilt + air + gold block
+ 
+Arturia Blade:
+ Yellow Name
+ Lore: Aurum Series (Light Grey Text)
+ - 16 Attack Damage
+ - 1.6 Attack Speed
+ - 25 durability
+ - Unrepairable
+ - Restores 1 durability every 8 seconds when held. 
+ Recipe:
+ Water Gem + Calibur Blade
+ 
+Arturia Excelsion:
+ Pink Name
+ Lore: Aurum Series (Light Grey Text)
+ - 16 Attack Damage
+ - 1.6 Attack Speed
+ - 25 durability
+ - Unrepairable
+ - Restores 1 durability every 8 seconds when held.
+ - If durability reaches one, sword does not take any more durability damage and instead deals
+ - 1 attack damage.
+ Recipe:
+ Holy Gem + Arturia Blade
+ 
+Blazing Blade:
+ Yellow Name:
+ Lore: Incendia Series (Light Grey Text)
+ - 5 attack damage
+ - 1.8 attack speed
+ - 130 durability
+ - Repairable with Tauvelite Dust
+ - When attacking, lights mobs on fire for 180 ticks. This is stackable with fire aspect. 
+ (Fire Aspect 2 on this sword = 340 fire ticks)
+ 
+ Recipe:
+ blaze rod + air + tempered edge
+ air + flint + air
+ hilt + air + blaze rod
+ 
+Megaera Blade:
+ Yellow Name:
+ Lore: Incendia Series (Light Grey Text)
+ - 8 attack damage
+ - 1.8 attack speed
+ - 130 durability
+ - Repairable with Tauvelite Dust
+ - When attacking, lights mobs on fire for 360 ticks. This is stackable with fire aspect. 
+ - Right click on a lava source block to consume it, and restore the sword's durability to full.
+ ^ (plays the same sound as when water touches lava)
+ - Restores durability (1 every 30 seconds) during the day above open sky.
+ - Loses durability (1 every second) if held in water.
+ 
+ Recipe:
+ fire gem + blazing blade (shapeless)
+ 
+Ayin Blade:
+ Blue Name:
+ - 20 attack damage.
+ - 1.6 attack speed.
+ - 10 durability
+ - Unrepairable
+ - Right click with the sword to deal damage to yourself, when this happens the sword gains an
+ ^ enchantment glow,  and the next 10 hits dont do durability damage to the sword. Each time
+   you use this ability it does more damage:
+   1st time: 5 hearts
+   2nd time: 7 hearts
+   3rd time: 9 hearts
+   4th time: 10 hearts
+   After using this ability you cannot use it until you have used up the durability shield.
+   
+ Recipe:
+ diamond block + air + tempered edge
+ air + eye of ender + air 
+ hilt + air + diamond block
+ 
+Goddess Blade
+ Lore: Goddess Series (Light Gray Text)
+ 6 attack damage
+ 1.6 attack speed
+ durability: 300
+ Repairable with Tauvelite Dust
+
+ Recipe:
+ cyan dye + air + tempered edge
+ air + glowstone block + air
+ hilt + air + cyan dye
+ 
+Pure Goddess Blade
+ Yellow Name
+ Lore: Goddess Series (Light Gray Text)
+ 12 attack damage
+ 1.6 attack speed
+ durability: 500
+ Repairable with Tauvelite Dust
+ 
+ Recipe:
+ Earth Gem + Goddess Blade (shapeless)
+ 
+Divine Goddess Blade
+ Blue Name
+ Lore: Goddess Series (Light Gray Text)
+ 12 attack damage
+ 1.6 attack speed
+ durability: 1000
+ Repairable with Tauvelite Dust
+ - Every 6 seconds restore half a heart of health if hunger is full.
+ 
+ Recipe:
+ Water Gem + Pure Goddess Blade (shapeless)
+ 
+Chosen Blade
+ Blue Name
+ Lore: Goddess Series (Light Gray Text)
+ 18 attack damage
+ 1.6 attack speed
+ durability: 2000
+ Repairable with Tauvelite Dust
+ - Every 6 seconds restore half a heart of health if hunger is full.
+ - If fully healed, right click the sword to give it an enchant glow and deal 4 extra damage until
+   the next hit. When right clicking to active this ability you get slowness 3 for 4 seconds.
+ 
+ Recipe: 
+ Fire Gem + Divine Goddess Blade (shapeless)
+Blade of the Hero
+ Pink Name
+ Lore: Goddess Series (Light Gray Text)
+ 18 attack damage
+ 1.6 attack speed
+ durability: 4000
+ Repairable with Tauvelite Dust
+ - Every 6 seconds restore half a heart of health if hunger is full.
+ - If fully healed, right click the sword to give it an enchant glow and deal 4 extra damage until
+   the next hit. When right clicking to active this ability you get slowness 3 for 4 seconds.
+   
+ Recipe:
+ holy gem + chosen blade + shadow gem (shapeless)
+
+Bows:
+
+Swift Bow:
+ Shoots arrows rapidly (1 every 0.5 seconds) when the right mouse button is held down.
+ Arrows do 4 damage.
+ Unenchantable
+ 384 Durability
+ Repairable with Tauvelite Dust
+ Recipe:
+ feather + stick + string
+ stick + feather + string
+ feather + stick + string
+ 
+Diamant Bow:
+ Does 12-13 damage fully charged.
+ Charges 50% faster.
+ 450 durability.
+ Repairable with Tauvelite Dust
+ 10 enchantability.
+ 
+ Recipe:
+ air + iron ingot + string
+ diamond + air + string
+ air + iron ingot + string
+ 
+ 
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aa",
+    " a"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "swordsplus:sword_hilt"
+  }
+}

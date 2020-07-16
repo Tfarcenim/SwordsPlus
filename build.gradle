@@ -38,7 +38,6 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
 
 
             // Recommended logging level for the console
@@ -53,7 +52,6 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
 
 
             // Recommended logging level for the console
@@ -61,6 +59,19 @@ minecraft {
 
             mods {
                 examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'swordsplus', '--all', '--output', file('src/generated/resources/'),
+                    '--existing', sourceSets.main.resources.srcDirs[0]
+            mods {
+                beesourceful {
                     source sourceSets.main
                 }
             }
@@ -127,7 +138,6 @@ jar {
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"examplemodsareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "${modid}.mixins.json"
         ])
     }
 }
@@ -152,10 +162,4 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
-}
-
-apply plugin: 'org.spongepowered.mixin'
-
-mixin {
-    add sourceSets.main, "${modid}.refmap.json"
 }

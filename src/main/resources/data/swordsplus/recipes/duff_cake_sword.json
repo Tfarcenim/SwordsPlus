@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a b",
+    " a ",
+    "d a"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:cake"
+    },
+    "b": {
+      "item": "swordsplus:tempered_edge"
+    },
+    "d": {
+      "item": "swordsplus:sword_hilt"
+    }
+  },
+  "result": {
+    "item": "swordsplus:duff_cake_sword"
+  }
+}

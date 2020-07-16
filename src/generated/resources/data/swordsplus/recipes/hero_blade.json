@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordsplus:divine_goddess_blade"
+    },
+    {
+      "item": "swordsplus:shadow_elemental_gem"
+    },
+    {
+      "item": "swordsplus:holy_elemental_gem"
+    }
+  ],
+  "result": {
+    "item": "swordsplus:hero_blade"
+  }
+}

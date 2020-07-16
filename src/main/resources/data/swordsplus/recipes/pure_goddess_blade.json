@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordsplus:goddess_blade"
+    },
+    {
+      "item": "swordsplus:earth_elemental_gem"
+    }
+  ],
+  "result": {
+    "item": "swordsplus:pure_goddess_blade"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:water_bucket"
+    },
+    "b": {
+      "item": "swordsplus:goddess_gem"
+    }
+  },
+  "result": {
+    "item": "swordsplus:water_elemental_gem"
+  }
+}
