@@ -11,6 +11,6 @@ public class ArturiaExcelsionItem extends CaliburSwordItem {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		return stack.getDamage() >= stack.getMaxDamage() || super.hitEntity(stack, target, attacker);
+		return stack.getDamage() < stack.getMaxDamage() - 1 && super.hitEntity(stack, target, attacker);
 	}
 }

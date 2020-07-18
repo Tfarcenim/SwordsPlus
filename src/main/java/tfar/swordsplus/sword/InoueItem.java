@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class Inoue extends SwordItem {
-	public Inoue(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+public class InoueItem extends SwordItem {
+	public InoueItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
 		super(tier, attackDamageIn, attackSpeedIn, builder);
 	}
 

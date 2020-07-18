@@ -19,6 +19,7 @@ public class DuffSwordItem extends SwordItem {
 		if (!worldIn.isRemote) {
 			playerIn.heal(2);
 			playerIn.getFoodStats().addStats(4,6);
+			playerIn.getHeldItem(handIn).damageItem(2,playerIn,playerEntity -> playerEntity.sendBreakAnimation(handIn));
 		}
 		return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
 	}

@@ -22,7 +22,7 @@ public class GreatBladeItem extends SwordItem {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-		return false;//super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
+		return false;
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class ChosenBladeItem extends DivineSwordItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		if (worldIn.isRemote) {
+		if (!worldIn.isRemote) {
 			if (playerIn.getMaxHealth() == playerIn.getHealth()) {
 				stack.getOrCreateTag().putBoolean("empowered", true);
 				playerIn.addPotionEffect(new EffectInstance(Effects.SLOWNESS,200,2));

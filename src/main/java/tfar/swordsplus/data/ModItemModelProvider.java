@@ -20,7 +20,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 			if (item instanceof BlockItem)
 				getBuilder(path).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
 			else if (item instanceof SwordItem) {
-				getBuilder(path).parent(new ModelFile.UncheckedModelFile(mcLoc("item/handheld")));
+				getBuilder(path).parent(new ModelFile.UncheckedModelFile(mcLoc("item/handheld")))
+								.texture("layer0",modLoc("item/"+path));
 			} else {
 				getBuilder(path).parent(new ModelFile.UncheckedModelFile(mcLoc("item/generated")))
 								.texture("layer0",modLoc("item/"+path));

@@ -14,17 +14,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlazingSwordItem extends SwordItem {
-	private final int burnTime;
+	public final int burnTime;
 
 	public BlazingSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder, int burnTime) {
 		super(tier, attackDamageIn, attackSpeedIn, builder);
 		this.burnTime = burnTime;
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		target.setFireTimer(target.getFireTimer() + burnTime);
-		return super.hitEntity(stack, target, attacker);
 	}
 
 	@Override

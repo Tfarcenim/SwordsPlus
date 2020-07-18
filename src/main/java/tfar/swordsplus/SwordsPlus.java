@@ -3,27 +3,33 @@ package tfar.swordsplus;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.network.rcon.ClientThread;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.logging.log4j.LogManager;
@@ -94,20 +100,39 @@ public class SwordsPlus {
 		bus.addGenericListener(Item.class,this::items);
 		EVENT_BUS.addListener(this::damage);
 		EVENT_BUS.addListener(this::critical);
+		EVENT_BUS.addListener(this::knockback);
+		EVENT_BUS.addListener(this::hurt);
+
+		if (FMLEnvironment.dist == Dist.CLIENT) {
+			EVENT_BUS.addListener(this::clientTick);
+		}
+	}
+
+	private static int bowHeld = 0;
+
+	private void clientTick(TickEvent.ClientTickEvent e) {
+		PlayerEntity player = Minecraft.getInstance().player;
+		if (player != null && player.getActiveItemStack().getItem() instanceof SwiftBowItem) {
+			bowHeld++;
+			if (bowHeld > 10) {
+				Minecraft.getInstance().playerController.onStoppedUsingItem(player);
+				bowHeld = 0;
+			}
+		}
 	}
 
 	private void critical(CriticalHitEvent e) {
 		PlayerEntity player = e.getPlayer();
 		if (player.getHeldItemMainhand().getItem() == SwordsPlus.dianus_blade) {
-			e.setDamageModifier(e.getDamageModifier() + 6);
+			e.setDamageModifier(e.getDamageModifier() + 1);
 		}
 	}
 
 	private void knockback(LivingKnockBackEvent e) {
 		if (e.getOriginalAttacker() instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity)e.getOriginalAttacker();
-			if (livingEntity.getHeldItemMainhand().getItem() == SwordsPlus.great_blade) {
-				e.setStrength(e.getStrength() + 5);
+			if (livingEntity.getHeldItemMainhand().getItem() == SwordsPlus.titania_blade) {
+				e.setStrength(e.getStrength() + 1);
 			}
 		}
 	}
@@ -127,11 +152,18 @@ public class SwordsPlus {
 
 	private void damage(LivingDamageEvent e) {
 			LivingEntity victim = e.getEntityLiving();
-			ItemStack sword = victim.getHeldItemMainhand();
-			if (sword.getItem() instanceof ChosenBladeItem) {
-				if (sword.hasTag())
-					sword.getTag().remove("empowered");
+			ItemStack vSword = victim.getHeldItemMainhand();
+			if (vSword.getItem() instanceof ChosenBladeItem) {
+				if (vSword.hasTag())
+					vSword.getTag().remove("empowered");
 		}
+			Entity attacker = e.getSource().getTrueSource();
+			if (attacker instanceof LivingEntity) {
+				ItemStack sword = ((LivingEntity) attacker).getHeldItemMainhand();
+				if (sword.getItem() instanceof BlazingSwordItem) {
+					victim.setFireTimer(victim.getFireTimer() + ((BlazingSwordItem)sword.getItem()).burnTime);
+				}
+			}
 	}
 
 	//not threadsafe
@@ -144,8 +176,9 @@ public class SwordsPlus {
 				for (BiomeManager.BiomeEntry biomeEntry : BiomeManager.getBiomes(biomeType)) {
 					biomeEntry.biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 									Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-													ezralite_ore.getDefaultState(), 2))
+													ezralite_ore.getDefaultState(), 4))
 													.withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))));
+
 					biomeEntry.biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 									Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
 													tauvelite_ore.getDefaultState(), 4))
@@ -177,45 +210,45 @@ public class SwordsPlus {
 
 		goddess_gem = register(new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"goddess_gem", e.getRegistry());
 
-		fire_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"fire_elemental_gem", e.getRegistry());
-		earth_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"earth_elemental_gem", e.getRegistry());
-		holy_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"holy_elemental_gem", e.getRegistry());
-		shadow_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"shadow_elemental_gem", e.getRegistry());
-		water_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"water_elemental_gem", e.getRegistry());
+		fire_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"fire_elemental_gem", e.getRegistry());
+		earth_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"earth_elemental_gem", e.getRegistry());
+		holy_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"holy_elemental_gem", e.getRegistry());
+		shadow_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"shadow_elemental_gem", e.getRegistry());
+		water_elemental_gem = register(new Item(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"water_elemental_gem", e.getRegistry());
 
-		venol_rapier = register(new VenolRapier(Materials.venol,3,-2.4f,new Item.Properties().group(ItemGroup.MISC)),"venol_rapier", e.getRegistry());
-		dianus_blade = register(new SwordItem(Materials.dianus,3,-2.4f,new Item.Properties().group(ItemGroup.MISC)),"dianus_blade", e.getRegistry());
+		venol_rapier = register(new VenolRapier(Materials.venol,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT)),"venol_rapier", e.getRegistry());
+		dianus_blade = register(new SwordItem(Materials.dianus,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT)),"dianus_blade", e.getRegistry());
 
-		inoue = register(new Inoue(Materials.inoue,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"inoue", e.getRegistry());
-		umbra_blade = register(new UmbraBlade(Materials.umbra,3,-2.4f,new Item.Properties().group(ItemGroup.MISC)),"umbra_blade", e.getRegistry());
+		inoue = register(new InoueItem(Materials.inoue,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"inoue", e.getRegistry());
+		umbra_blade = register(new UmbraBlade(Materials.umbra,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT)),"umbra_blade", e.getRegistry());
 
-		duff_cake_sword = register(new DuffSwordItem(Materials.duff_cake,3,-2.4f,new Item.Properties().group(ItemGroup.MISC)),"duff_cake_sword", e.getRegistry());
+		duff_cake_sword = register(new DuffSwordItem(Materials.duff_cake,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT)),"duff_cake_sword", e.getRegistry());
 
-		great_blade = register(new GreatBladeItem(Materials.great_blade,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"great_blade", e.getRegistry());
+		great_blade = register(new GreatBladeItem(Materials.great_blade,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"great_blade", e.getRegistry());
 
-		titania_blade = register(new TitaniaSwordItem(Materials.titania,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"titania_blade", e.getRegistry());
+		titania_blade = register(new TitaniaSwordItem(Materials.titania,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"titania_blade", e.getRegistry());
 
-		calibur_blade = register(new CaliburSwordItem(Materials.calibur,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),15 * 20),"calibur_blade", e.getRegistry());
+		calibur_blade = register(new CaliburSwordItem(Materials.calibur,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON),15 * 20),"calibur_blade", e.getRegistry());
 
-		arturia_blade = register(new CaliburSwordItem(Materials.arturia,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),8 * 20),"arturia_blade", e.getRegistry());
+		arturia_blade = register(new CaliburSwordItem(Materials.arturia,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON),8 * 20),"arturia_blade", e.getRegistry());
 
-		arturia_excelsion = register(new ArturiaExcelsionItem(Materials.arturia,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.EPIC),8 * 20),"arturia_excelsion", e.getRegistry());
+		arturia_excelsion = register(new ArturiaExcelsionItem(Materials.arturia,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC),8 * 20),"arturia_excelsion", e.getRegistry());
 
-		blazing_blade = register(new BlazingSwordItem(Materials.blazing,3,-2.2f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),180),"blazing_blade", e.getRegistry());
+		blazing_blade = register(new BlazingSwordItem(Materials.blazing,3,-2.2f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON),180),"blazing_blade", e.getRegistry());
 
-		megaera_blade = register(new MegaeraSwordItem(Materials.megaera,3,-2.2f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON),360),"megaera_blade", e.getRegistry());
+		megaera_blade = register(new MegaeraSwordItem(Materials.megaera,3,-2.2f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON),360),"megaera_blade", e.getRegistry());
 
-		ayin_blade = register(new AyinBladeItem(Materials.ayin,3,-2.2f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.RARE)),"ayin_blade", e.getRegistry());
+		ayin_blade = register(new AyinBladeItem(Materials.ayin,3,-2.2f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.RARE)),"ayin_blade", e.getRegistry());
 
-		goddess_blade = register(new GoddessSwordItem(Materials.goddess,3,-2.4f,new Item.Properties().group(ItemGroup.MISC)),"goddess_blade", e.getRegistry());
+		goddess_blade = register(new GoddessSwordItem(Materials.goddess,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT)),"goddess_blade", e.getRegistry());
 
-		pure_goddess_blade = register(new GoddessSwordItem(Materials.pure_goddess,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)),"pure_goddess_blade", e.getRegistry());
+		pure_goddess_blade = register(new GoddessSwordItem(Materials.pure_goddess,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON)),"pure_goddess_blade", e.getRegistry());
 
-		divine_goddess_blade = register(new DivineSwordItem(Materials.divine_goddess,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.RARE)),"divine_goddess_blade", e.getRegistry());
+		divine_goddess_blade = register(new DivineSwordItem(Materials.divine_goddess,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.RARE)),"divine_goddess_blade", e.getRegistry());
 
-		chosen_blade = register(new ChosenBladeItem(Materials.chosen,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.RARE)),"chosen_blade", e.getRegistry());
+		chosen_blade = register(new ChosenBladeItem(Materials.chosen,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.RARE)),"chosen_blade", e.getRegistry());
 
-		hero_blade = register(new ChosenBladeItem(Materials.hero,3,-2.4f,new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.EPIC)),"hero_blade", e.getRegistry());
+		hero_blade = register(new ChosenBladeItem(Materials.hero,3,-2.4f,new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)),"hero_blade", e.getRegistry());
 
 		swift_bow = register(new SwiftBowItem(new Item.Properties().group(ItemGroup.COMBAT).setNoRepair()),"swift_bow", e.getRegistry());
 

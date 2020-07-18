@@ -29,7 +29,14 @@ public class AyinBladeItem extends SwordItem {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		return getRemainingUses(stack) > 0 || super.hitEntity(stack, target, attacker);
+		if (getRemainingUses(stack) > 0) {
+			setRemainingUses(stack,getRemainingUses(stack)-1);
+			return true;
+		} else if (super.hitEntity(stack, target, attacker)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

@@ -2,11 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "aa",
-    " a"
+    "ba"
   ],
   "key": {
     "a": {
       "tag": "forge:ingots/iron"
+    },
+    "b": {
+      "tag": "forge:leather"
     }
   },
   "result": {

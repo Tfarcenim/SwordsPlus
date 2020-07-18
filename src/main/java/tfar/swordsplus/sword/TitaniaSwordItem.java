@@ -7,7 +7,7 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
-public class TitaniaSwordItem extends SwordItem {
+public class TitaniaSwordItem extends GreatBladeItem {
 	public TitaniaSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
 		super(tier, attackDamageIn, attackSpeedIn, builder);
 	}

@@ -2,11 +2,13 @@ package tfar.swordsplus.data;
 
 
 import net.minecraft.block.Blocks;
+import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
@@ -38,8 +40,9 @@ public class ModRecipeProvider extends RecipeProvider {
 
 		ShapedRecipeBuilderNoCriteria.shapedRecipe(SwordsPlus.sword_hilt)
 						.key('a', Tags.Items.INGOTS_IRON)
+						.key('b', Tags.Items.LEATHER)
 						.patternLine("aa")
-						.patternLine(" a")
+						.patternLine("ba")
 						.build(consumer);
 
 		ShapedRecipeBuilderNoCriteria.shapedRecipe(SwordsPlus.earth_elemental_gem)
@@ -240,5 +243,9 @@ public class ModRecipeProvider extends RecipeProvider {
 						.patternLine("b c")
 						.patternLine(" ac")
 						.build(consumer);
+
+		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(SwordsPlus.ezralite_ore),SwordsPlus.ezralite_dust,1,200);
+		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(SwordsPlus.tauvelite_ore),SwordsPlus.tauvelite_dust,1,200);
+
 	}
 }
