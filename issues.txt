@@ -1,0 +1,2 @@
+some more bugs: Ezralite doesnt drop any dust still
+missing texture for swift bow firing
