@@ -1,5 +1,6 @@
 package tfar.swordsplus;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
@@ -8,7 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.rcon.ClientThread;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
@@ -141,7 +144,7 @@ public class SwordsPlus {
 		if (e.getSource().getTrueSource() instanceof LivingEntity) {
 			LivingEntity attacker = (LivingEntity) e.getSource().getTrueSource();
 			ItemStack sword = attacker.getHeldItemMainhand();
-			if (sword.getItem() == arturia_excelsion && sword.getDamage() >= sword.getMaxDamage()) {
+			if (sword.getItem() == arturia_excelsion && sword.getDamage() >= sword.getMaxDamage()-1) {
 				e.setAmount(1);
 			}
 			if (sword.getItem() instanceof ChosenBladeItem) {
@@ -169,7 +172,14 @@ public class SwordsPlus {
 	//not threadsafe
 	private void setup(final FMLCommonSetupEvent event) {
 
+		for (ItemTier itemTier : ItemTier.values()) {
+			Ingredient old = itemTier.getRepairMaterial();
+			itemTier.repairMaterial = new LazyValue<>(() -> new CompoundIngredientExt(Lists.newArrayList(Ingredient.fromItems(tauvelite_dust),old)));
+		}
 
+		for (ArmorMaterial armorMaterial : ArmorMaterial.values()) {
+			armorMaterial.repairMaterial = new LazyValue<>(() -> new CompoundIngredientExt(Lists.newArrayList(Ingredient.fromItems(tauvelite_dust),armorMaterial.getRepairMaterial())));
+		}
 
 			for (BiomeManager.BiomeType biomeType : BiomeManager.BiomeType.values()) {
 
